@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ReactQueryCacheProvider queryCache={queryCache}>
-      <Header currentUser={data} />
+      <Header currentUser={data.data.user} />
       <div className="container">
         <Component {...pageProps} />
       </div>
