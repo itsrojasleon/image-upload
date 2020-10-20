@@ -1,13 +1,13 @@
 import Router from 'next/router';
 import Title from '../../components/title';
 import Input from '../../components/input';
-import { useInput } from '../../hooks/use-input';
+import { useInputText } from '../../hooks/use-input-text';
 import { useRequest } from '../../hooks/use-request';
 
 const Signup = () => {
-  const email = useInput('');
-  const password = useInput('');
-  const username = useInput('');
+  const email = useInputText('');
+  const password = useInputText('');
+  const username = useInputText('');
 
   const { doRequest, errors } = useRequest({
     url: '/api/users/signup',
