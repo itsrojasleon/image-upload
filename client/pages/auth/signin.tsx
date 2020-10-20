@@ -1,52 +1,34 @@
 import Router from 'next/router';
 import Title from '../../components/title';
-import Input from '../../components/input';
-import { useInputText } from '../../hooks/use-input-text';
+import { Form, Field } from '../../components/form';
 import { useRequest } from '../../hooks/use-request';
 
 const Signin = () => {
-  const email = useInputText('');
-  const password = useInputText('');
-
   const { doRequest, errors } = useRequest({
     url: '/api/users/signin',
     method: 'post',
     onSuccess: () => Router.push('/')
   });
 
-  const onSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-
-    doRequest({
-      email: email.value,
-      password: password.value
-    });
-  };
-
   return (
     <>
       <Title>Signin</Title>
-      <form onSubmit={onSubmit}>
-        <Input
-          label="email"
-          name="email"
-          placeholder="enter an email"
+      <Form
+        initialValues={{ email: '', password: '' }}
+        onSubmit={doRequest}
+        errors={errors}>
+        <Field
           aria-label="email-input"
-          {...email}
+          label="email"
+          placeholder="enter an email"
         />
-        <Input
-          type="password"
-          label="password"
-          name="password"
-          placeholder="enter a password"
+        <Field
           aria-label="password-input"
-          {...password}
+          label="password"
+          placeholder="enter a password"
+          type="password"
         />
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-        {errors}
-      </form>
+      </Form>
     </>
   );
 };

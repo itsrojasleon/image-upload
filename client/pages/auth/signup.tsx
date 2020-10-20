@@ -1,61 +1,39 @@
 import Router from 'next/router';
 import Title from '../../components/title';
-import Input from '../../components/input';
-import { useInputText } from '../../hooks/use-input-text';
+import { Form, Field } from '../../components/form';
 import { useRequest } from '../../hooks/use-request';
 
 const Signup = () => {
-  const email = useInputText('');
-  const password = useInputText('');
-  const username = useInputText('');
-
   const { doRequest, errors } = useRequest({
     url: '/api/users/signup',
     method: 'post',
     onSuccess: () => Router.push('/')
   });
 
-  const onSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-
-    doRequest({
-      email: email.value,
-      password: password.value,
-      username: username.value
-    });
-  };
-
   return (
     <>
       <Title>Signup</Title>
-      <form onSubmit={onSubmit}>
-        <Input
-          label="email"
-          name="email"
-          placeholder="Enter an email"
+      <Form
+        initialValues={{ email: '', password: '', username: '' }}
+        onSubmit={doRequest}
+        errors={errors}>
+        <Field
           aria-label="email-input"
-          {...email}
+          label="email"
+          placeholder="enter an email"
         />
-        <Input
-          type="password"
-          label="password"
-          name="password"
-          placeholder="Enter a password"
+        <Field
           aria-label="password-input"
-          {...password}
+          label="password"
+          placeholder="enter a password"
+          type="password"
         />
-        <Input
-          label="username"
-          name="username"
-          placeholder="Enter an username"
+        <Field
           aria-label="username-input"
-          {...username}
+          label="username"
+          placeholder="enter an username"
         />
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-        {errors}
-      </form>
+      </Form>
     </>
   );
 };

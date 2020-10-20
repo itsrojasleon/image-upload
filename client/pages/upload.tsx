@@ -8,6 +8,7 @@ const Upload = () => {
   return (
     <div>
       <Title>Upload</Title>
+      <h5>Select an image</h5>
       <Input
         type="file"
         {...file}
