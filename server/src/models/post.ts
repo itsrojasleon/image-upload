@@ -3,9 +3,8 @@ import mongoose from 'mongoose';
 interface PostAttrs {
   title: string;
   description: string;
-  createdAt: Date;
   imageUrl: string;
-  userId: string;
+  user: string;
 }
 
 interface PostDoc extends mongoose.Document {
@@ -13,31 +12,46 @@ interface PostDoc extends mongoose.Document {
   description: string;
   createdAt: Date;
   imageUrl: string;
-  userId: string;
+  user: string;
 }
 
 interface PostModel extends mongoose.Model<PostDoc> {
   build(attrs: PostAttrs): PostDoc;
 }
 
-const postSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
+const postSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      required: true
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
+    imageUrl: {
+      type: String,
+      required: true
+    },
+    user: {
+      type: String,
+      ref: 'User'
+    }
   },
-  description: {
-    type: String,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  imageUrl: {
-    type: String,
-    required: true
+  {
+    toJSON: {
+      transform(doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+      }
+    }
   }
-});
+);
 
 postSchema.statics.build = (attrs: PostAttrs) => {
   return new Post(attrs);

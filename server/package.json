@@ -33,6 +33,8 @@
     "@types/mongoose": "^5.7.36",
     "@types/pg": "^7.14.5",
     "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
+    "aws-sdk": "^2.775.0",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -40,6 +42,7 @@
     "express-async-errors": "^3.1.1",
     "express-validator": "^6.6.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.9"
+    "mongoose": "^5.10.9",
+    "uuid": "^8.3.1"
   }
 }

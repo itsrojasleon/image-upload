@@ -15,6 +15,7 @@ interface IField {
   'aria-label': string;
   placeholder: string;
   type?: string;
+  accept?: string;
 }
 
 const Form = ({ initialValues, onSubmit, errors, children }: IForm) => {
@@ -40,7 +41,8 @@ const Field = ({
   label,
   'aria-label': ariaLabel,
   placeholder,
-  type = 'text'
+  type = 'text',
+  accept = 'image/*'
 }: IField) => {
   const { values, handleChange } = useContext(FormContext);
 
@@ -59,6 +61,7 @@ const Field = ({
         onChange={handleChange}
         placeholder={placeholder}
         type={type}
+        accept={accept}
       />
     </div>
   );

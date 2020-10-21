@@ -5,11 +5,17 @@ import cookieSession from 'cookie-session';
 import 'express-async-errors';
 import { errorHandler } from './middlewares/error-handler';
 import { NotFoundError } from './errors/not-found';
+
 import { currentUserRouter } from './routes/users/current-user';
 import { signupRouter } from './routes/users/signup';
 import { signinRouter } from './routes/users/signin';
 import { signoutRouter } from './routes/users/signout';
 import { updateUserRouter } from './routes/users/update';
+
+import { createPostsRouter } from './routes/posts/new';
+
+import { uploadRouter } from './routes/upload/new';
+import { indexPostsRouter } from './routes/posts/index';
 
 const app = express();
 
@@ -41,6 +47,11 @@ app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(updateUserRouter);
+
+app.use(createPostsRouter);
+app.use(indexPostsRouter);
+
+app.use(uploadRouter);
 
 app.all('*', async () => {
   throw new NotFoundError();
