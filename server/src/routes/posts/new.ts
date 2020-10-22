@@ -32,7 +32,7 @@ router.post(
 
     await post.save();
 
-    res.send(post);
+    res.status(201).send(post);
   }
 );
 

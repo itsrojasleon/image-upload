@@ -16,6 +16,7 @@ import { createPostsRouter } from './routes/posts/new';
 
 import { uploadRouter } from './routes/upload/new';
 import { indexPostsRouter } from './routes/posts/index';
+import { showUserRouter } from './routes/users/show';
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(updateUserRouter);
+app.use(showUserRouter);
 
 app.use(createPostsRouter);
 app.use(indexPostsRouter);

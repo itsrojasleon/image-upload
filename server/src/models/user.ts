@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { PasswordManager } from '../services/password-manager';
+import { PostDoc } from './post';
 
 interface UserAttrs {
   email: string;
@@ -7,10 +8,11 @@ interface UserAttrs {
   username: string;
 }
 
-interface UserDoc extends mongoose.Document {
+export interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
   username: string;
+  posts: PostDoc[];
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -30,7 +32,13 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true
-    }
+    },
+    posts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+      }
+    ]
   },
   {
     toJSON: {

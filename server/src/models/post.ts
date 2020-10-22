@@ -7,7 +7,7 @@ interface PostAttrs {
   user: string;
 }
 
-interface PostDoc extends mongoose.Document {
+export interface PostDoc extends mongoose.Document {
   title: string;
   description: string;
   createdAt: Date;
@@ -38,7 +38,7 @@ const postSchema = new mongoose.Schema(
       required: true
     },
     user: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     }
   },
