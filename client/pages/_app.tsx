@@ -7,10 +7,10 @@ import Spinner from '../components/spinner';
 const queryCache = new QueryCache();
 
 function MyApp({ Component, pageProps }) {
-  const { isLoading, error, data } = useQuery('user', async () => {
-    const user = await fetcher('api/users/currentuser');
-    return user;
-  });
+  const { isLoading, error, data } = useQuery(
+    'user',
+    async () => await fetcher('api/users/currentuser')
+  );
 
   if (isLoading) return <Spinner />;
   if (error) return 'An error has occurred: ' + error;

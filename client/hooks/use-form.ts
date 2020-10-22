@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useState, useReducer } from 'react';
 import { fetcher } from '../api/fetcher';
 
 const reducer = (state, newState) => ({ ...state, ...newState });
@@ -11,6 +11,8 @@ export const useForm = ({
   onSubmit: (...params) => void | Promise<void>;
 }) => {
   const [values, dispatch] = useReducer(reducer, initialValues);
+
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (e.currentTarget.files?.length) {
@@ -26,6 +28,7 @@ export const useForm = ({
     e.preventDefault();
 
     if (values['imageUrl']) {
+      setIsUploading(true);
       const {
         data: { url, key }
       } = await fetcher.get('/api/upload');
@@ -43,10 +46,11 @@ export const useForm = ({
       values['imageUrl'] = key;
 
       onSubmit({ ...values });
+      setIsUploading(false);
     } else {
       onSubmit({ ...values });
     }
   };
 
-  return { values, handleChange, handleSubmit };
+  return { values, handleChange, handleSubmit, isUploading };
 };

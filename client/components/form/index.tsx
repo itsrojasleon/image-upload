@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import { useForm } from '../../hooks/use-form';
+import Spinner from '../spinner';
 
 const FormContext = createContext(null);
 
@@ -20,7 +21,7 @@ interface IField {
 }
 
 const Form = ({ initialValues, onSubmit, errors, children }: IForm) => {
-  const { values, handleChange, handleSubmit } = useForm({
+  const { values, handleChange, handleSubmit, isUploading } = useForm({
     initialValues,
     onSubmit
   });
@@ -31,6 +32,7 @@ const Form = ({ initialValues, onSubmit, errors, children }: IForm) => {
         {children}
       </FormContext.Provider>
       {errors}
+      {isUploading && <Spinner />}
       <button type="submit" className="btn btn-primary">
         Submit
       </button>

@@ -1,16 +1,21 @@
-import { useState } from 'react';
 import Router from 'next/router';
 import Title from '../components/title';
 import { Form, Field } from '../components/form';
 import { useRequest } from '../hooks/use-request';
-import { fetcher } from '../api/fetcher';
+import { useEffect } from 'react';
 
-const Upload = () => {
+const Upload = ({ currentUser }) => {
   const { doRequest, errors } = useRequest({
     url: '/api/posts',
     method: 'post',
     onSuccess: () => Router.push('/')
   });
+
+  useEffect(() => {
+    if (!currentUser) {
+      Router.push('/');
+    }
+  }, []);
 
   return (
     <div>

@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import Link from 'next/link';
 import {
   Card,
   CardImage,
@@ -27,7 +26,7 @@ const Home = () => {
       <div className="row justify-content-center">
         <div className="col col-lg-6">
           {data.data.map((post) => (
-            <Card>
+            <Card key={post.id}>
               <CardImage
                 src={`https://upload-123.s3.us-east-2.amazonaws.com/${post.imageUrl}`}
                 alt={post.title}

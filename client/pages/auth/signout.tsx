@@ -15,7 +15,7 @@ const Signout = () => {
 
   return (
     <div>
-      <div>See you then! 👋</div>
+      <h1>See ya! 👋</h1>
     </div>
   );
 };
