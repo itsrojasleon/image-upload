@@ -22,11 +22,11 @@ const Home = () => {
   if (error) return 'An error has occurred: ' + error;
 
   return (
-    <div className="container">
+    <>
       <Title>Posts</Title>
-      <div className="row justify-content-md-center">
-        {data.data.map((post) => (
-          <div key={post.id} className="col col-lg-6">
+      <div className="row justify-content-center">
+        <div className="col col-lg-6">
+          {data.data.map((post) => (
             <Card>
               <CardImage
                 src={`https://upload-123.s3.us-east-2.amazonaws.com/${post.imageUrl}`}
@@ -45,10 +45,10 @@ const Home = () => {
                 </div>
               </CardBody>
             </Card>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

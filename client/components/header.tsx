@@ -4,16 +4,15 @@ const Header = ({ currentUser }) => {
   const links = [
     !currentUser && { href: '/auth/signin', label: 'Signin' },
     !currentUser && { href: '/auth/signup', label: 'Signup' },
-    currentUser && { href: '/posts', label: 'My Posts' },
     currentUser && { href: '/upload', label: 'Upload' },
     currentUser && { href: '/auth/signout', label: 'Signout' }
   ].filter((linkConfig) => linkConfig);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
       <div className="container-fluid">
         <Link href="/">
-          <a className="navbar-brand mb-0 h1">Image upload</a>
+          <a className="navbar-brand mb-0 h1">Poster</a>
         </Link>
         <div className="d-flex">
           <ul className="navbar-nav mr-auto mb-2 mb-lg-0">

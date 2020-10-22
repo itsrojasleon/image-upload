@@ -1,4 +1,6 @@
-const Card: React.FC = ({ children }) => <div className="card">{children}</div>;
+const Card: React.FC = ({ children }) => (
+  <div className="card mb-3">{children}</div>
+);
 
 const CardImage = ({ src, alt }: { src: string; alt: string }) => (
   <img className="card-img-top" src={src} alt={alt} />
@@ -9,7 +11,7 @@ const CardBody: React.FC = ({ children }) => (
 );
 
 const CardTitle: React.FC = ({ children }) => (
-  <h5 className="card-title">{children}</h5>
+  <h3 className="card-title">{children}</h3>
 );
 
 const CardText: React.FC = ({ children }) => (
