@@ -11,7 +11,6 @@ import { signupRouter } from './routes/users/signup';
 import { signinRouter } from './routes/users/signin';
 import { signoutRouter } from './routes/users/signout';
 import { updateUserRouter } from './routes/users/update';
-import { showUserRouter } from './routes/users/show';
 
 import { createPostsRouter } from './routes/posts/new';
 
@@ -49,7 +48,6 @@ app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(updateUserRouter);
-app.use(showUserRouter);
 
 app.use(createPostsRouter);
 app.use(indexPostsRouter);
