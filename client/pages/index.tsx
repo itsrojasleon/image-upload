@@ -8,7 +8,9 @@ import {
   CardTitle
 } from '../components/card';
 import Title from '../components/title';
+import Spinner from '../components/spinner';
 import { fetcher } from '../api/fetcher';
+import { formattedDate } from '../utils';
 
 const Home = () => {
   const { isLoading, error, data } = useQuery(
@@ -16,7 +18,7 @@ const Home = () => {
     async () => await fetcher('/api/posts')
   );
 
-  if (isLoading) return 'Loading';
+  if (isLoading) return <Spinner />;
   if (error) return 'An error has occurred: ' + error;
 
   return (
@@ -33,11 +35,14 @@ const Home = () => {
               <CardBody>
                 <CardTitle>{post.title}</CardTitle>
                 <CardText>{post.description}</CardText>
-                <Link
-                  href="/users/[userId]"
-                  as={`/users/${post.user.username}`}>
-                  <a>{post.user.username}</a>
-                </Link>
+                <div className="row">
+                  <div className="col text-left">@{post.user.username}</div>
+                  <div className="col">
+                    <p className="text-right text-black-50">
+                      {formattedDate(new Date(post.createdAt))}
+                    </p>
+                  </div>
+                </div>
               </CardBody>
             </Card>
           </div>

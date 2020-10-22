@@ -1,14 +1,21 @@
+import { useEffect } from 'react';
 import Router from 'next/router';
 import Title from '../../components/title';
 import { Form, Field } from '../../components/form';
 import { useRequest } from '../../hooks/use-request';
 
-const Signup = () => {
+const Signup = ({ currentUser }) => {
   const { doRequest, errors } = useRequest({
     url: '/api/users/signup',
     method: 'post',
     onSuccess: () => Router.push('/')
   });
+
+  useEffect(() => {
+    if (currentUser) {
+      Router.push('/');
+    }
+  }, []);
 
   return (
     <>

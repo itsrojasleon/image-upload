@@ -21,10 +21,10 @@ export const useForm = ({
       dispatch({ [e.currentTarget.name]: e.currentTarget.value });
     }
   };
-  // console.log(values);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (values['imageUrl']) {
       const {
         data: { url, key }
@@ -38,6 +38,8 @@ export const useForm = ({
         }
       });
 
+      // Save a fragment of text to reference where the bucket is
+      // Do not save the image directly within the database
       values['imageUrl'] = key;
 
       onSubmit({ ...values });

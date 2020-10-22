@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import Router from 'next/router';
 import Title from '../components/title';
 import { Form, Field } from '../components/form';
 import { useRequest } from '../hooks/use-request';
+import { fetcher } from '../api/fetcher';
 
 const Upload = () => {
   const { doRequest, errors } = useRequest({
@@ -12,7 +14,7 @@ const Upload = () => {
 
   return (
     <div>
-      <Title>Upload</Title>
+      <Title>Create a post</Title>
       <Form
         initialValues={{ title: '', description: '' }}
         onSubmit={doRequest}
