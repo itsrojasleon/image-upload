@@ -17,7 +17,8 @@ router.post(
       .not()
       .isEmpty()
       .withMessage('You must provide a description'),
-    body('imageUrl').not().isEmpty().withMessage('You must provide an image')
+    body('imageUrl').not().isEmpty().withMessage('You must provide an image'),
+    body('user').not().isEmpty().withMessage('You must provide a user id')
   ],
   validateRequest,
   async (req: Request, res: Response) => {

@@ -11,12 +11,13 @@ import { signupRouter } from './routes/users/signup';
 import { signinRouter } from './routes/users/signin';
 import { signoutRouter } from './routes/users/signout';
 import { updateUserRouter } from './routes/users/update';
+import { showUserRouter } from './routes/users/show';
 
 import { createPostsRouter } from './routes/posts/new';
 
 import { uploadRouter } from './routes/upload/new';
 import { indexPostsRouter } from './routes/posts/index';
-import { showUserRouter } from './routes/users/show';
+import { deletePostsRouter } from './routes/posts/delete';
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use(showUserRouter);
 
 app.use(createPostsRouter);
 app.use(indexPostsRouter);
+app.use(deletePostsRouter);
 
 app.use(uploadRouter);
 
