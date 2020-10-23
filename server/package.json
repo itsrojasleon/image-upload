@@ -6,24 +6,15 @@
   "scripts": {
     "dev": "ts-node-dev --poll src/index.ts",
     "build": "tsc -p .",
-    "test": "jest --watchAll --no-cache"
+    "test:watch": "jest --watchAll --no-cache",
+    "test": "jest"
   },
   "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/build/",
-      "<rootDir>/node_modules/"
-    ],
     "preset": "ts-jest",
     "testEnvironment": "node",
     "setupFilesAfterEnv": [
       "./src/test/setup.ts"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test",
-      "pre-push": "npm test"
-    }
   },
   "keywords": [],
   "author": "me",
@@ -31,7 +22,6 @@
   "devDependencies": {
     "@types/cors": "^2.8.8",
     "@types/jest": "^26.0.14",
-    "husky": "^4.3.0",
     "jest": "^26.5.3",
     "mongodb-memory-server": "^6.9.2",
     "supertest": "^5.0.0",
