@@ -25,6 +25,11 @@ const Home = () => {
       <Title>Posts</Title>
       <div className="row justify-content-center">
         <div className="col col-lg-6">
+          {data.data.length === 0 && (
+            <button type="button" className="btn btn-primary btn btn-block">
+              No posts created
+            </button>
+          )}
           {data.data.map((post) => (
             <Card key={post.id}>
               <CardImage
