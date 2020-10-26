@@ -1,28 +1,29 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useQuery, QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { fetcher } from '../api/fetcher';
 import Header from '../components/header';
-import Spinner from '../components/spinner';
 
-const queryCache = new QueryCache();
-
-function MyApp({ Component, pageProps }) {
-  const { isLoading, error, data } = useQuery(
-    'user',
-    async () => await fetcher('api/users/currentuser')
-  );
-
-  if (isLoading) return <Spinner />;
-  if (error) return 'An error has occurred: ' + error;
-
+function MyApp({ Component, pageProps, user }) {
   return (
-    <ReactQueryCacheProvider queryCache={queryCache}>
-      <Header currentUser={data.data.user} />
+    <>
+      <Header currentUser={user} />
       <div className="container">
-        <Component {...pageProps} currentUser={data.data.user} />
+        <Component {...pageProps} currentUser={user} />
       </div>
-    </ReactQueryCacheProvider>
+    </>
   );
 }
+
+MyApp.getInitialProps = async (appContext) => {
+  if (typeof window === 'undefined') {
+    const { data } = await fetcher.get('/api/users/currentuser', {
+      headers: appContext.ctx.req.headers
+    });
+
+    return { user: data.user };
+  } else {
+    const { data } = await fetcher.get('/api/users/currentuser');
+    return { user: data.user };
+  }
+};
 
 export default MyApp;
